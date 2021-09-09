@@ -1,5 +1,6 @@
 import pygame
 
+from nlc_dino_runner.components.dinosaur import Dinosaur
 from nlc_dino_runner.utils.constants import TITLE, ICON, SCREEN_WIDTH, SCREEN_HEIGHT, BG, FPS
 
 class Game:
@@ -13,6 +14,7 @@ class Game:
         self.x_pos_bg = 0
         self.y_pos_bg = 360
         self.game_speed = 20
+        self.player = Dinosaur()
 
     def run(self):
         self.playing = True
@@ -27,12 +29,14 @@ class Game:
                 self.playing = False
 
     def update(self):
-        print("Actualizando")
+        user_input = pygame.key.get_pressed()
+        self.player.update(user_input)
 
     def draw(self):
         self.clock.tick(FPS)
         self.screen.fill((255, 255, 255))
         self.draw_background()
+        self.player.draw(self.screen)
         pygame.display.update()
         pygame.display.flip()
 
