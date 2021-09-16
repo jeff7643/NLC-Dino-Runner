@@ -3,7 +3,7 @@ import pygame
 
 from nlc_dino_runner.components import text_utils
 from nlc_dino_runner.components.obstacles.obstaclesManager import ObstaclesManager
-from nlc_dino_runner.utils.constants import TITLE, ICON, SCREEN_WIDTH, SCREEN_HEIGHT, BG, FPS
+from nlc_dino_runner.utils.constants import TITLE, ICON, SCREEN_WIDTH, SCREEN_HEIGHT, BG, FPS, FINAL_SCREEN
 from nlc_dino_runner.components.dinosaur import Dinosaur
 
 
@@ -106,11 +106,20 @@ class Game:
     def print_menu_elements(self):
         half_screen_height = SCREEN_HEIGHT // 2
 
-        text, text_rect = text_utils.get_centered_message("Press any Key to Start")
-        self.screen.blit(text, text_rect)
+        if self.death_count == 0:
+            text, text_rect = text_utils.get_centered_message("Press any Key to Start")
+            self.screen.blit(text, text_rect)
+        else:
+            text, text_rect = text_utils.get_centered_message("Press any Key to Restart")
+            self.screen.blit(text, text_rect)
+            score, score_rect = text_utils.get_centered_score(str(self.points), height=half_screen_height + 50)
+            self.screen.blit(score, score_rect)
+
+            self.screen.blit(FINAL_SCREEN, ((SCREEN_WIDTH // 2) - 190, half_screen_height - 200))
 
         death_score, death_score_rect = text_utils.get_centered_message("Death count: " + str(self.death_count), height=half_screen_height + 50)
         self.screen.blit(death_score, death_score_rect)
 
         # Imprimiendo el dinosaurio de portada
         self.screen.blit(ICON, ((SCREEN_WIDTH //2) - 40, half_screen_height - 150))
+
