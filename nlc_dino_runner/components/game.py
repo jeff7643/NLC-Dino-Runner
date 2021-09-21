@@ -21,7 +21,7 @@ class Game:
         self.game_speed = 20
         self.player = Dinosaur()
         self.obstacle_manager = ObstaclesManager()
-        self.power_up_manager = PowerUpManager
+        self.power_up_manager = PowerUpManager()
         self.points = 0
         self.running = True
         self.death_count = 0
@@ -66,6 +66,7 @@ class Game:
             self.game_speed += 1
         score_element, score_element_rect = text_utils.get_score_element(self.points)
         self.screen.blit(score_element, score_element_rect)
+        self.player.check_invincibility(self.screen)
 
 
 
