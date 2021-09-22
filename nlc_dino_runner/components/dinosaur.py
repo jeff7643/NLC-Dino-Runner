@@ -11,7 +11,6 @@ from nlc_dino_runner.utils.constants import (RUNNING,
                                              DUCKING_SHIELD,
                                              JUMPING_SHIELD
                                              )
-from nlc_dino_runner.components.text_utils import get_centered_score
 
 class Dinosaur(Sprite):
     X_POS = 80

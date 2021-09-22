@@ -3,6 +3,7 @@ import pygame
 
 from nlc_dino_runner.components import text_utils
 from nlc_dino_runner.components.obstacles.obstaclesManager import ObstaclesManager
+from nlc_dino_runner.components.player_hearts.hearts_manager import HeartsManager
 from nlc_dino_runner.components.powerups.power_up_manager import PowerUpManager
 from nlc_dino_runner.utils.constants import TITLE, ICON, SCREEN_WIDTH, SCREEN_HEIGHT, BG, FPS, FINAL_SCREEN
 from nlc_dino_runner.components.dinosaur import Dinosaur
@@ -22,6 +23,7 @@ class Game:
         self.player = Dinosaur()
         self.obstacle_manager = ObstaclesManager()
         self.power_up_manager = PowerUpManager()
+        self.hearts_manager = HeartsManager()
         self.points = 0
         self.running = True
         self.death_count = 0
@@ -29,6 +31,7 @@ class Game:
     def run(self):
         self.obstacle_manager.reset_obstacles()
         self.power_up_manager.reset_power_ups(self.points)
+        self.hearts_manager.reset_counter_hearts()
         self.points = 0
         self.playing = True
         while self.playing:
@@ -56,6 +59,7 @@ class Game:
         self.player.draw(self.screen)
         self.obstacle_manager.draw(self.screen)
         self.power_up_manager.draw(self.screen)
+        self.hearts_manager.draw(self.screen)
 
         pygame.display.update()
         pygame.display.flip()
